@@ -1,0 +1,28 @@
+{
+  "name": "salesloft-project",
+  "version": "1.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "array-filter": "^1.0.0",
+    "axios": "^0.18.0",
+    "body-parser": "~1.18.2",
+    "circular-json": "^0.5.5",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
+    "express": "~4.15.5",
+    "hbs": "~4.0.1",
+    "morgan": "~1.9.0",
+    "request": "^2.88.0",
+    "string-similarity": "^1.2.2",
+    "util": "^0.11.0"
+  }
+}
