@@ -37,8 +37,9 @@ app.use(function(err, req, res, next) {
 // ================================================================================
 
 //require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
-
+require("./routing/htmlRoutes")(app);
+require("./routing/apiRoutes")(app);
+app.use(express.static(__dirname + '/public'));
 // =============================================================================
 // LISTENER
 // The below code effectively "starts" our server
@@ -47,96 +48,14 @@ require("./routes/htmlRoutes")(app);
 app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
 });
-require("dotenv").config();
-var request = require('request');
-let api_key = process.env.API_KEY;
-console.log(api_key);
-let axios = require('axios');
-let util = require('util');
-var filter = require('array-filter');
-var stringSimilarity = require('string-similarity');
-//const JSON = require('circular-json');
-var qs = require('qs');
+// require("dotenv").config();
+// var request = require('request');
+// let api_key = process.env.API_KEY;
+// let axios = require('axios');
+// let util = require('util');
+// var filter = require('array-filter');
+// var stringSimilarity = require('string-similarity');
+// //const JSON = require('circular-json');
+// var qs = require('qs');
 
 
-var names = '',
-    Email = '',
-    Job = '',
-    id = ''
-
-// });
-//var newData = [];
-//Level 1
-var options = {
-    url: "https://api.salesloft.com/v2/people.json",
-    headers: {
-        Authorization: api_key,
-        //Authorization: 'Bearer ak_5b70eb70e5e4a76896073d598439139faac91dac64e929e11c879a7550deb9b7',
-        contentType: 'application/json'
-    }
-};
-
-function callback(error, response, body) {
-    if (!error && response.statusCode === 200) {
-        // console.log(body + "this one");
-        // console.log(JSON.parse(body));
-        var jsonData = JSON.parse(body);
-        // console.log(jsonData.data.display_name);
-        var result1 = jsonData.data.map(a => a.display_name);
-        var result2 = jsonData.data.map(a => a.email_address);
-        var result3 = jsonData.data.map(a => a.title);
-
-        //console.log(result1);
-
-
-        //};
-        //Level 2
-        //     let counter = str => {
-        //         return str.toString().split('').reduce((total, letter) => {
-        //             total[letter] ? total[letter]++ : total[letter] = 1;
-        //             return total;
-        //         }, {});
-        //     };
-
-        //     //console.log(counter(result2));
-
-        //     // console.log("Title: " + jsonData.data.display_name);
-        //     // console.log("Year: " + jsonData.display_name);
-        //     // console.log("Rated: " + jsonData.email_address);
-        //     // console.log("IMDB Rating: " + jsonData.id);
-
-        // } else {
-        //     //console.log(error + "no this one")
-        // }
-
-        // }
-
-        //Level 3
-
-
-        for (var i = 0; i < result1.length; i++) {
-
-            var matches = stringSimilarity.findBestMatch(result1[i], result1);
-            console.log(matches.ratings.filter(obj => obj.rating == 1 || obj.rating >= 0.3));
-
-        }
-        // console.log(matches.ratings.filter( obj => obj.rating == 1))
-        //  console.log(matches.ratings.filter(target));
-        //if (matches.ratings.target <= 1){
-        // 	console.log(matches);
-        // }
-
-
-
-
-    }
-
-
-
-
-
-
-}
-
-
-request(options, callback);

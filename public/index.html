@@ -1,16 +1,18 @@
 <!Doctype html>
-    <html lang="en-us">
+<html lang="en-us">
 
-    <head>
+<head>
     <meta charset="UTF-8">
     <title>Employee Tracker</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
-    <!-- <script type='text/javascript' src='config.js'></script> -->
-    <!-- <script src= "./../logic.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <!-- <script type='text/javascript' src='/node_modules/string-similarity/compare-strings.js'></script> -->
+    
+    <script type='text/javascript' src= './bundle.js'></script>
+
 </head>
 
 <body>
@@ -32,9 +34,42 @@
                         <table class="table table-hover" id='employee-table'>
                             <thead>
                                 <tr>
-                                    <th>Employee Name</th>
-                                    <th>Email</th>
-                                    <th>Job Title</th>
+                                    <th id='Names'>Employee Name</th>
+                                    <th id='Email'>Email</th>
+                                    <th id='Job'>Job Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class="table table-hover" id='employee-table2'>
+                            <thead>
+                                <tr>
+                                    <th id='breakdown'>Email Letter Breakdown - All Letters of emails addresses broken down </th>
+                                    <!-- <th id = 'Email'>Email</th> -->
+                                    <!-- <th id = 'Job'>Job Title</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class="table table-hover" id='employee-table3'>
+                            <thead>
+                                <tr>
+                                    <th id='duplicates'>Possible Duplicates - Using the Email letter breakdown, any employees with letters that appear more then 36 times is shown with their lengths. </th>
+                                    <!-- <th id = 'Email'>Email</th>
+                                    <th id = 'Job'>Job Title</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <table class="table table-hover" id='employee-table4'>
+                            <thead>
+                                <tr>
+                                    <th id='bonus'>Bonus: Duplicates 2.0 - Any employee with a rating less then 1 is 30% or more similar to the closest Employee above who has a rating equal to 1. </th>
+                                    <!-- <th id = 'Email'>Email</th>
+                                    <th id = 'Job'>Job Title</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,83 +79,19 @@
                 </div>
             </div>
         </div>
+        <button id='level1' type="button" class="btn btn-danger"> Level 1
+        </button>
+        <button id='level2' type="button" class="btn btn-primary"> Level 2
+        </button>
+        <button id='level3' type="button" class="btn btn-success"> Level 3
+        </button>
+         <button id='bonus' type="button" class="btn btn-default"> Level 4
+        </button>
+
     </div>
+    <script type='text/javascript' src= './level1.js'></script>
 </body>
-<script type="text/javascript">
-    require("dotenv").config();
 
-var api_key = process.env.API_KEY;
-//var api_key = require("./key");
 
-            // function walgreensAPI() {
-            //     var lat = localStorage.getItem('lat');
-            //     var long = localStorage.getItem('long');
-            //     var url = 'https://services-qa.walgreens.com/api/stores/search'
-            //     var herokuUrl = "https://stark-chamber-44091.herokuapp.com/" + url
-
-            //     var WGobj = {
-            //         "apiKey": "4n8VgBaIAcwfqcxWAQSreiniwZAGXltd",
-            //         "affId": "storesapi",
-            //         "lat": lat,
-            //         "lng": long,
-            //         "srchOpt": 'fs',
-            //         "nxtPrev": '',
-            //         "requestType": "locator",
-            //         "act": "fndStore",
-            //         "view": "fndStoreJSON",
-            //         "devinf": '',
-            //         "appver": '',
-            //     }
-
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "https://api.salesloft.com/v2/people.json"
-            //         // headers: {
-            //         //     "Access-Control-Allow-Origin": "*",
-            //         // },
-            //         // processData: false,
-            //         contentType: 'application/json',
-            //         data: JSON.stringify(WGobj),
-            //     }).done(function(response) {
-            //         localStorage.setItem('walgreens', JSON.stringify(response.stores));
-            //         // updateDOMwalgreens()
-            //         $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-            //   empStartPretty + "</td><tr>");
-
-            //     }).fail(function(jqXHR, textStatus, errorThrown) {
-            //         console.log('ERROR', errorThrown)
-            //     })
-            // }
-
-            var url = "https://api.salesloft.com/v2/people.json";
-
-            // var lat = localStorage.getItem('lat');
-            // var long = localStorage.getItem('long');
-            //var url = 'https://services-qa.walgreens.com/api/stores/search'
-            //var herokuUrl = "https://stark-chamber-44091.herokuapp.com/" + url
-
-            var WGobj = {
-                "apiKey": api_key,
-                "Names": display_name,
-                "Email": email_address,
-                "Job Title": title
-
-            }
-
-            $.ajax({
-                type: "GET",
-                url: url,
-                // headers: {
-                //     "Access-Control-Allow-Origin": "*",
-                // },
-                // processData: false,
-                contentType: 'application/json',
-                data: JSON.stringify(WGobj),
-            }).done(function(response) {
-                console.log(json.stringify(response))
-                var tableArray = [];
-            });
-
-</script>
 
 </html>
